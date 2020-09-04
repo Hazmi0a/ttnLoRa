@@ -1,0 +1,15 @@
+.cardChart .chart-area {
+  height: 220px;
+  width: 100%;
+}
+
+.cardChart.card-chart-pie .chart-area {
+  padding: 10px 0 25px;
+  height: auto;
+}
+.cardChart.card-chart-pie .card-title {
+  margin-bottom: 10px;
+}
+.cardChart.card-chart-pie .card-title i {
+  font-size: 1rem;
+}
