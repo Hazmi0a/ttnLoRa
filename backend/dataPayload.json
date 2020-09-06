@@ -1,0 +1,16 @@
+{
+  "hardware_serial": "216814230561015f",
+  "port": 1,
+  "counter": 6,
+  "payload_raw": "<Buffer 0a 8c 05 14>",
+  "payload_fields": {
+    "humidity": 27,
+    "temperature": 13
+  },
+  "metadata": {
+    "time": "2019-01-05T09:49:36.304979275Z",
+    "frequency": 867.7,
+    "modulation": "LORA",
+    "airtime": 51456000
+  }
+}
