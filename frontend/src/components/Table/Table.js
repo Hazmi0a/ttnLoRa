@@ -20,11 +20,9 @@ function Table({ columns, data }) {
   });
 
   var getStatus = (value) => {
-    const status = "danger";
-
-    if (value < 26) {
+    if (value < 30) {
       return "success";
-    } else if (value >= 26 && value < 35) {
+    } else if (value >= 30 && value < 35) {
       return "warning";
     } else {
       return "danger";
@@ -56,6 +54,7 @@ function Table({ columns, data }) {
                     <ProgressBar
                       variant={getStatus(cell.value)}
                       now={cell.value}
+                      max="60"
                     />
                   </td>
                 ) : (
