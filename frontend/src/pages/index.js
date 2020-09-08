@@ -50,7 +50,9 @@ const Index = () => (
         </Col>
       </Row>
       <Row>
-        <Tableavg></Tableavg>
+        <Col xs={3}>
+          <Tableavg></Tableavg>
+        </Col>
       </Row>
     </Container>
     <DarkModeSwitch />

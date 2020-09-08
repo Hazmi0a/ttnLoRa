@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTable } from "react-table";
+import BTable from "react-bootstrap/Table";
+import { ProgressBar } from "react-bootstrap";
 
 import makeData from "./makeData";
 
 function Table({ columns, data }) {
+  const [status, setStatus] = useState("info");
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -16,9 +19,22 @@ function Table({ columns, data }) {
     data,
   });
 
+  var getStatus = (value) => {
+    const status = "danger";
+
+    if (value < 26) {
+      return "success";
+    } else if (value >= 26 && value < 35) {
+      return "warning";
+    } else {
+      return "danger";
+    }
+  };
+  const succ = "success";
+
   // Render the UI for your table
   return (
-    <table {...getTableProps()}>
+    <BTable {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -34,53 +50,36 @@ function Table({ columns, data }) {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
+                // console.log(cell);
+                return cell.column.Header === "Avg" ? (
+                  <td {...cell.getCellProps()}>
+                    <ProgressBar
+                      variant={getStatus(cell.value)}
+                      now={cell.value}
+                    />
+                  </td>
+                ) : (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                );
               })}
             </tr>
           );
         })}
       </tbody>
-    </table>
+    </BTable>
   );
 }
 
 function Tableavg() {
   const columns = React.useMemo(
     () => [
-      {
-        Header: "Name",
-        columns: [
-          {
-            Header: "First Name",
-            accessor: "firstName",
-          },
-          {
-            Header: "Last Name",
-            accessor: "lastName",
-          },
-        ],
-      },
-      {
-        Header: "Info",
-        columns: [
-          {
-            Header: "Age",
-            accessor: "age",
-          },
-          {
-            Header: "Visits",
-            accessor: "visits",
-          },
-          {
-            Header: "Status",
-            accessor: "status",
-          },
-          {
-            Header: "Profile Progress",
-            accessor: "progress",
-          },
-        ],
-      },
+      { Header: "Sensor", accessor: "name", width: 70 },
+
+      { Header: "Min", accessor: "min", width: 70 },
+
+      { Header: "Max", accessor: "max", width: 70 },
+
+      { Header: "Avg", accessor: "avg", width: 70 },
     ],
     []
   );
