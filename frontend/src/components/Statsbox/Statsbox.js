@@ -7,7 +7,7 @@ import styles from "./Statsbox.module.css";
 
 import { Card, Row, Col } from "react-bootstrap";
 
-export const Statbox = () => {
+export const Statbox = ({ title, stat }) => {
   const [passInput, setPassInput] = useState("");
 
   useEffect(() => {
@@ -25,6 +25,7 @@ export const Statbox = () => {
     text_center,
     icon_warning,
     numbers,
+    overlay,
     card_category,
     react_icon,
   } = styles;
@@ -33,15 +34,16 @@ export const Statbox = () => {
       <Card className={card_stats}>
         <Card.Body>
           <Row>
-            <Col xs="5">
-              <div>
-                <BsFillCollectionFill size="1.7em" className={react_icon} />
+            <div className={overlay}></div>
+            <Col xs="4">
+              <div className={react_icon}>
+                <BsFillCollectionFill size="2.5em" />
               </div>
             </Col>
             <Col xs="7">
               <div className={numbers}>
-                <p className={card_category}>Sensors</p>
-                <Card.Title tag="h3">2000</Card.Title>
+                <p className={card_category}>{title}</p>
+                <Card.Title tag="h3">{stat}</Card.Title>
               </div>
             </Col>
           </Row>
@@ -52,5 +54,6 @@ export const Statbox = () => {
 };
 
 Statbox.defaultProps = {
-  chartTitle: "Chart",
+  title: "Sensors",
+  stat: "2000",
 };

@@ -53,9 +53,19 @@ const Index = () => (
           <Chartbox chart={chartExample5} />
         </Col>
       </Row>
+      <br />
       <Row>
         <Col lg={3}>
           <Statbox />
+        </Col>
+        <Col lg={3}>
+          <Statbox title="Warnings" stat="36" />
+        </Col>
+        <Col lg={3}>
+          <Statbox title="Offline" stat="5" />
+        </Col>
+        <Col lg={3}>
+          <Statbox title="Data Size" stat="150GB" />
         </Col>
       </Row>
       <br />
