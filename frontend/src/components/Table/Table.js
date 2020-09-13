@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useTable } from "react-table";
 import BTable from "react-bootstrap/Table";
-import { ProgressBar } from "react-bootstrap";
+import { ProgressBar, Card } from "react-bootstrap";
 
 import makeData from "./makeData";
 
-function Table({ columns, data }) {
+const Table = ({ columns, data }) => {
   const [status, setStatus] = useState("info");
   // Use the state and functions returned from useTable to build your UI
   const {
@@ -46,15 +46,16 @@ function Table({ columns, data }) {
         {rows.map((row, i) => {
           prepareRow(row);
           return (
+            //Cell manipulation is here
             <tr {...row.getRowProps()}>
               {row.cells.map((cell) => {
-                // console.log(cell);
                 return cell.column.Header === "Avg" ? (
                   <td {...cell.getCellProps()}>
                     <ProgressBar
                       variant={getStatus(cell.value)}
                       now={cell.value}
                       max="60"
+                      label={cell.value}
                     />
                   </td>
                 ) : (
@@ -67,9 +68,9 @@ function Table({ columns, data }) {
       </tbody>
     </BTable>
   );
-}
+};
 
-function Tableavg() {
+export const Tableavg = ({ tableTitle, data }) => {
   const columns = React.useMemo(
     () => [
       { Header: "Sensor", accessor: "name", width: 70 },
@@ -83,9 +84,18 @@ function Tableavg() {
     []
   );
 
-  const data = React.useMemo(() => makeData(20), []);
+  return (
+    <Card className="card-chart">
+      <Card.Header>{tableTitle}</Card.Header>
+      <Card.Body>
+        <div className="chart-area">
+          <Table columns={columns} data={data} />
+        </div>
+      </Card.Body>
+    </Card>
+  );
+};
 
-  return <Table columns={columns} data={data} />;
-}
-
-export default Tableavg;
+Tableavg.defaultProps = {
+  tableTitle: 'Devices by "data"',
+};

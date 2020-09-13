@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Link as ChakraLink,
   Text,
@@ -18,10 +19,12 @@ import { Main } from "../components/Main";
 import { DarkModeSwitch } from "../components/DarkModeSwitch";
 import { CTA } from "../components/CTA";
 import { Footer } from "../components/Footer";
-import { Cardbox } from "../components/Cardbox/Cardbox";
+import { Chartbox } from "../components/Chartbox/Chartbox";
 import Navbar from "../components/Navbar";
 import { Header } from "../components/Header/Header";
-import Tableavg from "../components/Table/Table";
+import { Tableavg } from "../components/Table/Table";
+import { Statbox } from "../components/Statsbox/Statsbox";
+import makeData from "../components/Table/makeData";
 import {
   chartExample5,
   chartExample6,
@@ -31,27 +34,37 @@ import {
   chartExample10,
 } from "../components/variables/charts";
 
+const data = makeData(20);
 const Index = () => (
   <>
     <Header />
     <Container fluid>
       <Row>
-        <Col xs={3}>
-          <Cardbox chart={chartExample5} />
+        <Col>
+          <Chartbox chart={chartExample5} />
         </Col>
-        <Col xs={3}>
-          <Cardbox chart={chartExample5} />
+        <Col>
+          <Chartbox chart={chartExample5} />
         </Col>
-        <Col xs={3}>
-          <Cardbox chart={chartExample5} />
+        <Col>
+          <Chartbox chart={chartExample5} />
         </Col>
-        <Col xs={3}>
-          <Cardbox chart={chartExample5} />
+        <Col>
+          <Chartbox chart={chartExample5} />
         </Col>
       </Row>
       <Row>
-        <Col xs={3}>
-          <Tableavg></Tableavg>
+        <Col lg={3}>
+          <Statbox />
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <Col>
+          <Tableavg data={data} />
+        </Col>
+        <Col>
+          <Tableavg data={data} />
         </Col>
       </Row>
     </Container>
