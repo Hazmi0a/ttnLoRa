@@ -37,7 +37,6 @@ import {
 const data = makeData(20);
 const Index = () => (
   <>
-    <Header />
     <Container fluid>
       <Row>
         <Col>

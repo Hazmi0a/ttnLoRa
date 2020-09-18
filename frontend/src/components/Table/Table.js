@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { useTable } from "react-table";
 import BTable from "react-bootstrap/Table";
 import { ProgressBar, Card } from "react-bootstrap";
@@ -45,24 +46,27 @@ const Table = ({ columns, data }) => {
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row);
+          console.log(row);
           return (
             //Cell manipulation is here
-            <tr {...row.getRowProps()}>
-              {row.cells.map((cell) => {
-                return cell.column.Header === "Avg" ? (
-                  <td {...cell.getCellProps()}>
-                    <ProgressBar
-                      variant={getStatus(cell.value)}
-                      now={cell.value}
-                      max="60"
-                      label={cell.value}
-                    />
-                  </td>
-                ) : (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                );
-              })}
-            </tr>
+            <Link href={"/chart/" + row.original.hardware_serial}>
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return cell.column.Header === "Avg" ? (
+                    <td {...cell.getCellProps()}>
+                      <ProgressBar
+                        variant={getStatus(cell.value)}
+                        now={cell.value}
+                        max="60"
+                        label={cell.value}
+                      />
+                    </td>
+                  ) : (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            </Link>
           );
         })}
       </tbody>

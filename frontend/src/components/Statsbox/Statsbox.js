@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { BsFillCollectionFill } from "react-icons/bs";
 import { IconContext } from "react-icons";
 import classNames from "classnames";
@@ -21,9 +22,7 @@ export const Statbox = ({ title, stat }) => {
   const buttonAction = (e, url) => {};
   const {
     card_stats,
-    info_icon,
-    text_center,
-    icon_warning,
+
     numbers,
     overlay,
     card_category,
@@ -31,24 +30,26 @@ export const Statbox = ({ title, stat }) => {
   } = styles;
   return (
     <div>
-      <Card className={card_stats}>
-        <Card.Body>
-          <Row>
-            <div className={overlay}></div>
-            <Col xs="4">
-              <div className={react_icon}>
-                <BsFillCollectionFill size="2.5em" />
-              </div>
-            </Col>
-            <Col xs="7">
-              <div className={numbers}>
-                <p className={card_category}>{title}</p>
-                <Card.Title tag="h3">{stat}</Card.Title>
-              </div>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+      <Link href={"/stat/" + title}>
+        <Card className={card_stats}>
+          <Card.Body>
+            <Row>
+              <div className={overlay}></div>
+              <Col xs="4">
+                <div className={react_icon}>
+                  <BsFillCollectionFill size="2.5em" />
+                </div>
+              </Col>
+              <Col xs="7">
+                <div className={numbers}>
+                  <p className={card_category}>{title}</p>
+                  <Card.Title tag="h3">{stat}</Card.Title>
+                </div>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      </Link>
     </div>
   );
 };

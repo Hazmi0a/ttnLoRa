@@ -1,5 +1,7 @@
 frontend/.gitignore
 frontend/README.md
+frontend/package-lock.json
+backend/package-lock.json
 
 # Logs
 logs

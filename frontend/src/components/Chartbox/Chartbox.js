@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Line, Bar, Pie } from "react-chartjs-2";
-
+import Link from "next/link";
 import styles from "./Chartbox.module.css";
 
 import {
@@ -29,14 +29,16 @@ export const Chartbox = ({ chartTitle, chart }) => {
 
   return (
     <div>
-      <Card className={card_chart}>
-        <Card.Body>
-          <Card.Title tag="h2">{chartTitle}</Card.Title>
-          <div className={chart_area}>
-            <Line data={chart.data} options={chart.options} />
-          </div>
-        </Card.Body>
-      </Card>
+      <Link href={"/stat/" + chartTitle}>
+        <Card className={card_chart}>
+          <Card.Body>
+            <Card.Title tag="h2">{chartTitle}</Card.Title>
+            <div className={chart_area}>
+              <Line data={chart.data} options={chart.options} />
+            </div>
+          </Card.Body>
+        </Card>
+      </Link>
     </div>
   );
 };

@@ -19,7 +19,7 @@
   left: 0;
   top: 0;
   right: 0;
-  border-style: solid none none none none;
+  border-style: none none none solid;
   border-radius: 5px;
 }
 .bg {
