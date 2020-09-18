@@ -3,6 +3,7 @@
 }
 
 .justify_content_end {
-  position: absolute;
-  right: 0;
+  display: inline-block;
+  float: none;
+  text-align: center;
 }
