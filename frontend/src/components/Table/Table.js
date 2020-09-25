@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { useTable } from "react-table";
+import { useTable, useSortBy, useTableState } from "react-table";
 import BTable from "react-bootstrap/Table";
 import { ProgressBar, Card } from "react-bootstrap";
 
-import makeData from "./makeData";
-
-const Table = ({ columns, data }) => {
-  const [status, setStatus] = useState("info");
+const Table = ({ columns, data, initialState }) => {
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,
@@ -15,10 +12,14 @@ const Table = ({ columns, data }) => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({
-    columns,
-    data,
-  });
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState,
+    },
+    useSortBy
+  );
 
   var getStatus = (value) => {
     if (value < 30) {
@@ -29,7 +30,6 @@ const Table = ({ columns, data }) => {
       return "danger";
     }
   };
-  const succ = "success";
 
   // Render the UI for your table
   return (
@@ -38,7 +38,13 @@ const Table = ({ columns, data }) => {
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              <th
+                {...column.getHeaderProps(
+                  column.getSortByToggleProps({ title: "Avg" })
+                )}
+              >
+                {column.render("Header")}
+              </th>
             ))}
           </tr>
         ))}
@@ -46,7 +52,6 @@ const Table = ({ columns, data }) => {
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row);
-          console.log(row);
           return (
             //Cell manipulation is here
             <Link href={"/chart/" + row.original.hardware_serial}>
@@ -87,13 +92,30 @@ export const Tableavg = ({ tableTitle, data }) => {
     ],
     []
   );
+  // const initialState = React.useMemo(() => {
+  //   sortBy: [
+  //     {
+  //       id: "avg",
+  //       desc: true,
+  //     },
+  //   ];
+  // }, []);
+
+  const initialState = {
+    sortBy: [
+      {
+        id: "avg",
+        desc: true,
+      },
+    ],
+  };
 
   return (
     <Card className="card-chart">
       <Card.Header>{tableTitle}</Card.Header>
       <Card.Body>
         <div className="chart-area">
-          <Table columns={columns} data={data} />
+          <Table columns={columns} data={data} initialState={initialState} />
         </div>
       </Card.Body>
     </Card>

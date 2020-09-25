@@ -13,14 +13,10 @@ const getRndInteger = (min, max) => {
 };
 
 const newSensor = () => {
-  const min = getRndInteger(10, 32);
-  const max = getRndInteger(32, 55);
+  const reading = getRndInteger(10, 55);
   return {
-    name: namor.generate({ words: 1, numbers: 1 }),
-    hardware_serial: Math.floor(Math.random() * Math.pow(10, 16)),
-    min,
-    max,
-    avg: getRndInteger(min, max),
+    time: namor.generate({ words: 1, numbers: 1 }),
+    reading,
   };
 };
 
